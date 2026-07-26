@@ -16,15 +16,14 @@ export const SignUp = () => {
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                     <form className="space-y-6">
                         <div>
-                            <label htmlFor="email" className="block text-sm/6 font-medium text-blue-400">
-                                Email address
+                            <label htmlFor="first-name" className="block text-sm/6 font-medium text-blue-400">
+                                First Name
                             </label>
                             <div className="mt-2">
                                 <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                    
+                                    id="first-name"
+                                    name="first-name"
+                                    type="text"                   
                                     required
                                     className="block w-full rounded-md bg-blue/5 px-3 py-1.5 text-base text-blue outline-1 -outline-offset-1 outline-blue/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                                 />
@@ -33,16 +32,16 @@ export const SignUp = () => {
 
                         <div>
                             <div className="flex items-center justify-between">
-                                <label htmlFor="password" className="block text-sm/6 font-medium text-blue-400">
-                                    Name
+                                <label htmlFor="last-name" className="block text-sm/6 font-medium text-blue-400">
+                                    Last Name
                                 </label>
                                 <div className="text-sm">
                                 </div>
                             </div>
                             <div className="mt-2">
                                 <input
-                                    id="name"
-                                    name="name"
+                                    id="last-name"
+                                    name="last-name"
                                     type="text"
 
                                     required
@@ -53,6 +52,21 @@ export const SignUp = () => {
 
                         <div>
                             <label htmlFor="email" className="block text-sm/6 font-medium text-blue-400">
+                                Email
+                            </label>
+                            <div className="mt-2">
+                                <input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+               
+                                    required
+                                    className="block w-full rounded-md bg-blue/5 px-3 py-1.5 text-base text-blue outline-1 -outline-offset-1 outline-blue/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <label htmlFor="password" className="block text-sm/6 font-medium text-blue-400">
                                 Password
                             </label>
                             <div className="mt-2">
@@ -60,7 +74,7 @@ export const SignUp = () => {
                                     id="password"
                                     name="password"
                                     type="password"
-               
+
                                     required
                                     className="block w-full rounded-md bg-blue/5 px-3 py-1.5 text-base text-blue outline-1 -outline-offset-1 outline-blue/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                                 />
@@ -68,7 +82,7 @@ export const SignUp = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="email" className="block text-sm/6 font-medium text-blue-400">
+                            <label htmlFor="role" className="block text-sm/6 font-medium text-blue-400">
                                 Role
                             </label>
                             <div className="mt-2">
