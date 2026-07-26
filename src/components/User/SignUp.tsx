@@ -1,5 +1,15 @@
+import { use, useState } from "react";
+import { User, UserRole } from "../../models/User";
 
 export const SignUp = () => {
+    const [user,setUser] = useState<User>({
+            userId: "",
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            role: UserRole.ADMIN
+    })
     return (
      <>
      
@@ -23,7 +33,8 @@ export const SignUp = () => {
                                 <input
                                     id="first-name"
                                     name="first-name"
-                                    type="text"                   
+                                    type="text"
+                                    value={user.firstName}                   
                                     required
                                     className="block w-full rounded-md bg-blue/5 px-3 py-1.5 text-base text-blue outline-1 -outline-offset-1 outline-blue/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                                 />
@@ -43,6 +54,7 @@ export const SignUp = () => {
                                     id="last-name"
                                     name="last-name"
                                     type="text"
+                                    value={user.lastName}   
 
                                     required
                                     className="block w-full rounded-md bg-blue/5 px-3 py-1.5 text-base text-blue outline-1 -outline-offset-1 outline-blue/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
@@ -59,7 +71,7 @@ export const SignUp = () => {
                                     id="email"
                                     name="email"
                                     type="email"
-               
+                                    value={user.email}   
                                     required
                                     className="block w-full rounded-md bg-blue/5 px-3 py-1.5 text-base text-blue outline-1 -outline-offset-1 outline-blue/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                                 />
@@ -74,7 +86,7 @@ export const SignUp = () => {
                                     id="password"
                                     name="password"
                                     type="password"
-
+                                    value={user.password}   
                                     required
                                     className="block w-full rounded-md bg-blue/5 px-3 py-1.5 text-base text-blue outline-1 -outline-offset-1 outline-blue/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                                 />
@@ -90,7 +102,7 @@ export const SignUp = () => {
                                     id="role"
                                     name="role"
                                     type="text"
-         
+                                    value={user.role}   
                                     required
                                     className="block w-full rounded-md bg-blue/5 px-3 py-1.5 text-base text-blue outline-1 -outline-offset-1 outline-blue/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                                 />
