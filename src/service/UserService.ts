@@ -16,4 +16,13 @@ const saveUser = async (user: any) => {
     
 }
 
-export default {saveUser}
+const getUsers = async () =>{
+    try {
+        const response = await axios.get(baseUrl);
+        return response.data
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+export default { saveUser, getUsers}
