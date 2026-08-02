@@ -6,8 +6,8 @@ import { UserEdit } from "./UserEdit"
 export const UserView = () => {
 
     const [users, setUser] = useState<User[]>([])
-    const [ open, setOpen ] = useState(false)
-    const [ selectedUser, setSelectedUser] = useState<User | null >(null)
+    const [open, setOpen] = useState(false)
+    const [selectedUser, setSelectedUser] = useState<User | null>(null)
 
     const getAllUsers = async () => {
         try {
@@ -24,8 +24,10 @@ export const UserView = () => {
         getAllUsers()
     }, [])
 
-    const handleOnEdit = (user: User) =>{
-        console.log("Selected user is: ",user)
+    const handleOnEdit = (user: User) => {
+        console.log("Selected user is: ", user)
+        setSelectedUser(user)
+        setOpen(true)
     }
     return (<>
         <div className="max-w-7xl mx-auto mt-8 bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
@@ -77,14 +79,14 @@ export const UserView = () => {
                                 <td className="px-6 py-4 text-gray-600">{user.email}</td>
                                 <td className="px-6 py-4 text-gray-600">{user.password}</td>
                                 <td className="px-6 py-4">
-                                    <span 
-                                    className="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-medium"
+                                    <span
+                                        className="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-medium"
                                     >
                                         {user.role}
                                     </span>
                                 </td>
                                 <td className="px-6 py-4 text-center space-x-2">
-                                    <button onClick={()=> handleOnEdit(user)} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                                    <button onClick={() => handleOnEdit(user)} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
                                         Edit
                                     </button>
                                     <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
@@ -96,7 +98,12 @@ export const UserView = () => {
 
                     </tbody>
                 </table>
-                {/* <UserEdit/> */}
+                <UserEdit
+                    open={open}
+                    user={selectedUser}
+                    onClose={() => setOpen(false)}
+                    onSave={getAllUsers}
+                />
             </div>
         </div>
     </>)

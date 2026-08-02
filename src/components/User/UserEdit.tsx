@@ -1,4 +1,20 @@
-export const UserEdit = () => {
+import { use, useEffect, useState } from "react"
+import { UserEditProps } from "../../models/UserEditProps"
+import { User } from "../../models/User"
+
+export const UserEdit = ({
+    open,
+    user,
+    onClose,
+    onSave
+}:UserEditProps) => {
+    const [ updateFormData, setUpdateFormData] = useState <User | null>(null)
+    
+     useEffect(()=>{
+        setUpdateFormData(user)
+     }, [user])
+    
+     if(!open || !updateFormData) return null
     return (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
             <div className="w-full max-w-md bg-white rounded-xl shadow-xl">
@@ -19,12 +35,25 @@ export const UserEdit = () => {
                     {/* Name */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Full Name
+                            First Name
                         </label>
                         <input
                             type="text"
                             name="name"
-                            // value={updateFormData.name}
+                            value={updateFormData?.firstName}
+                            // onChange={handleOnChange}
+                            placeholder="Enter full name"
+                            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Last Name
+                        </label>
+                        <input
+                            type="text"
+                            name="name"
+                            value={updateFormData?.lastName}
                             // onChange={handleOnChange}
                             placeholder="Enter full name"
                             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
@@ -39,7 +68,7 @@ export const UserEdit = () => {
                         <input
                             type="email"
                             name="email"
-                            // value={updateFormData.email}
+                            value={updateFormData?.email}
                             // onChange={handleOnChange}
                             placeholder="Enter email address"
                             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
@@ -54,7 +83,7 @@ export const UserEdit = () => {
                         <input
                             type="password"
                             name="password"
-                            // value={updateFormData.password}
+                            value={updateFormData?.password}
                             // onChange={handleOnChange}
                             placeholder="Enter new password"
                             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
@@ -69,7 +98,7 @@ export const UserEdit = () => {
 
                         <select
                             name="role"
-                            // value={updateFormData.role}
+                            value={updateFormData?.role}
                             // onChange={handleOnChange}
                             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                         >
@@ -82,7 +111,7 @@ export const UserEdit = () => {
                     <div className="flex justify-end gap-3 pt-2">
                         <button
                             type="button"
-                            // onClick={onClose}
+                            onClick={onClose}
                             className="rounded-lg border border-gray-300 px-5 py-2 text-gray-700 hover:bg-gray-100 transition"
                         >
                             Cancel
