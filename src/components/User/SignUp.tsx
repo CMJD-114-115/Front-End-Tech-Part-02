@@ -1,28 +1,36 @@
 import { ChangeEvent, use, useState } from "react";
 import { User, UserRole } from "../../models/User";
+import UserService from "../../service/UserService";
 
 export const SignUp = () => {
-    const [user,setUser] = useState<User>({
-            userId: "",
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: "",
-            role: UserRole.ADMIN
+    const [user, setUser] = useState<User>({
+        userId: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        role: UserRole.ADMIN
     })
     // Catch Input values
-    const handleOnChange = (e: ChangeEvent<HTMLInputElement>) =>{
-       const { name, value} = e.target
-       setUser((prev)=> ({...prev, [name]: value}))
+    const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target
+        setUser((prev) => ({ ...prev, [name]: value }))
     }
 
-    const handleOnSubmit = (e: React.SyntheticEvent)=>{
-       e.preventDefault()
+    const handleOnSubmit = async (e: React.SyntheticEvent) => {
+        e.preventDefault()
+        const status = await UserService.saveUser(user)
+        if (status !== 201) {
+            alert("User save failed")
+            return
+        }
+        alert("User save Successfully")
+
     }
 
     return (
-     <>
-     
+        <>
+
             <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     {/* <img
@@ -45,7 +53,7 @@ export const SignUp = () => {
                                     name="firstName"
                                     type="text"
                                     value={user.firstName}
-                                    onChange={handleOnChange}                   
+                                    onChange={handleOnChange}
                                     required
                                     className="block w-full rounded-md bg-blue/5 px-3 py-1.5 text-base text-blue outline-1 -outline-offset-1 outline-blue/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                                 />
@@ -65,8 +73,8 @@ export const SignUp = () => {
                                     id="last-name"
                                     name="lastName"
                                     type="text"
-                                    value={user.lastName}   
-                                    onChange={handleOnChange}   
+                                    value={user.lastName}
+                                    onChange={handleOnChange}
                                     required
                                     className="block w-full rounded-md bg-blue/5 px-3 py-1.5 text-base text-blue outline-1 -outline-offset-1 outline-blue/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                                 />
@@ -82,8 +90,8 @@ export const SignUp = () => {
                                     id="email"
                                     name="email"
                                     type="email"
-                                    value={user.email}   
-                                    onChange={handleOnChange}   
+                                    value={user.email}
+                                    onChange={handleOnChange}
                                     required
                                     className="block w-full rounded-md bg-blue/5 px-3 py-1.5 text-base text-blue outline-1 -outline-offset-1 outline-blue/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                                 />
@@ -98,8 +106,8 @@ export const SignUp = () => {
                                     id="password"
                                     name="password"
                                     type="password"
-                                    value={user.password}  
-                                    onChange={handleOnChange}    
+                                    value={user.password}
+                                    onChange={handleOnChange}
                                     required
                                     className="block w-full rounded-md bg-blue/5 px-3 py-1.5 text-base text-blue outline-1 -outline-offset-1 outline-blue/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                                 />
@@ -115,8 +123,8 @@ export const SignUp = () => {
                                     id="role"
                                     name="role"
                                     type="text"
-                                    value={user.role}  
-                                    onChange={handleOnChange}    
+                                    value={user.role}
+                                    onChange={handleOnChange}
                                     required
                                     className="block w-full rounded-md bg-blue/5 px-3 py-1.5 text-base text-blue outline-1 -outline-offset-1 outline-blue/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                                 />
