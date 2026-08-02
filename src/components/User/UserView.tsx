@@ -1,21 +1,25 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import UserService from "../../service/UserService"
+import { User } from "../../models/User"
 
 export const UserView = () => {
 
-    const getAllUsers = async ()=>{
-        try{
+    const [user, setUser] = useState<User[]>([])
+
+    const getAllUsers = async () => {
+        try {
             const userData = await UserService.getUsers()
             console.log(userData)
+            if (userData) setUser(userData)
 
-        }catch(err){
+        } catch (err) {
             console.error(err)
         }
-        
+
     }
-    useEffect(()=>{
+    useEffect(() => {
         getAllUsers()
-    },[])
+    }, [])
     return (<>
         <div className="max-w-6xl mx-auto mt-8 bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
             {/* Header */}
