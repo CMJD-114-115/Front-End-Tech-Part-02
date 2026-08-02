@@ -1,20 +1,52 @@
-import { use, useEffect, useState } from "react"
+import React, { ChangeEvent, use, useEffect, useState } from "react"
 import { UserEditProps } from "../../models/UserEditProps"
 import { User } from "../../models/User"
+import UserService from "../../service/UserService"
 
 export const UserEdit = ({
     open,
     user,
     onClose,
     onSave
-}:UserEditProps) => {
-    const [ updateFormData, setUpdateFormData] = useState <User | null>(null)
-    
-     useEffect(()=>{
+}: UserEditProps) => {
+    const [updateFormData, setUpdateFormData] = useState<User | null>(null)
+
+    useEffect(() => {
         setUpdateFormData(user)
-     }, [user])
-    
-     if(!open || !updateFormData) return null
+    }, [user])
+
+    const handleOnChange = (e: ChangeEvent<HTMLInputElement>) =>{
+        if(!updateFormData) return
+
+        // const name = e.target.name
+        // const value = e.target.value
+
+        const { name, value} = e.target
+        setUpdateFormData((prev)=>({
+            ...prev!, [name]: value
+        }));
+    }
+
+    const handleOnSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!updateFormData) return
+
+        const status = await UserService.updateUser(updateFormData)
+        if (status === 204) {
+            alert("User Details Updated Successfully")
+            onSave()
+            onClose()
+        } else {
+            alert("User Details Update Failed")
+        }
+
+
+    }
+
+    if (!open || !updateFormData) return null
+
+
+
     return (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
             <div className="w-full max-w-md bg-white rounded-xl shadow-xl">
@@ -30,7 +62,7 @@ export const UserEdit = ({
                 </div>
 
                 {/* Form */}
-                <form  className="p-6 space-y-5">
+                <form onSubmit={handleOnSubmit} className="p-6 space-y-5">
 
                     {/* Name */}
                     <div>
@@ -39,9 +71,9 @@ export const UserEdit = ({
                         </label>
                         <input
                             type="text"
-                            name="name"
-                            value={updateFormData?.firstName}
-                            // onChange={handleOnChange}
+                            name="firstName"
+                            value={updateFormData.firstName}
+                            onChange={handleOnChange}
                             placeholder="Enter full name"
                             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                         />
@@ -52,9 +84,9 @@ export const UserEdit = ({
                         </label>
                         <input
                             type="text"
-                            name="name"
-                            value={updateFormData?.lastName}
-                            // onChange={handleOnChange}
+                            name="lastName"
+                            value={updateFormData.lastName}
+                            onChange={handleOnChange}
                             placeholder="Enter full name"
                             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                         />
@@ -68,7 +100,7 @@ export const UserEdit = ({
                         <input
                             type="email"
                             name="email"
-                            value={updateFormData?.email}
+                            value={updateFormData.email}
                             // onChange={handleOnChange}
                             placeholder="Enter email address"
                             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
@@ -83,8 +115,8 @@ export const UserEdit = ({
                         <input
                             type="password"
                             name="password"
-                            value={updateFormData?.password}
-                            // onChange={handleOnChange}
+                            value={updateFormData.password}
+                            onChange={handleOnChange}
                             placeholder="Enter new password"
                             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                         />
@@ -96,15 +128,14 @@ export const UserEdit = ({
                             Role
                         </label>
 
-                        <select
-                            name="role"
-                            value={updateFormData?.role}
-                            // onChange={handleOnChange}
+                        <input
+                            type="password"
+                            name="password"
+                            value={updateFormData.role}
+                            onChange={handleOnChange}
+                            placeholder="Enter new role"
                             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
-                        >
-                            <option value="USER">User</option>
-                            <option value="ADMIN">Admin</option>
-                        </select>
+                        />
                     </div>
 
                     {/* Buttons */}

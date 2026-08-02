@@ -25,4 +25,21 @@ const getUsers = async () =>{
     }
 }
 
-export default { saveUser, getUsers}
+const updateUser = async (user: any) => {
+    try {
+        const response = await axios.patch(
+            `${baseUrl}/${user.userId}`,
+            user
+        );
+        if(response.status !== 204){
+            throw new Error ("Failed to Update the User")
+        }
+        return response.status
+    } catch (err) {
+        console.error(err)
+    }
+
+
+}
+
+export default { saveUser, getUsers, updateUser}
