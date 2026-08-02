@@ -16,6 +16,10 @@ export const SignUp = () => {
        setUser((prev)=> ({...prev, [name]: value}))
     }
 
+    const handleOnSubmit = (e: React.SyntheticEvent)=>{
+       e.preventDefault()
+    }
+
     return (
      <>
      
@@ -30,7 +34,7 @@ export const SignUp = () => {
                 </div>
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={handleOnSubmit}>
                         <div>
                             <label htmlFor="first-name" className="block text-sm/6 font-medium text-blue-400">
                                 First Name
@@ -122,9 +126,15 @@ export const SignUp = () => {
                         <div>
                             <button
                                 type="submit"
-                                className="flex w-full justify-center rounded-md bg-green-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                                className="flex w-full justify-center rounded-md bg-green-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 mb-4"
                             >
                                 Sign in
+                            </button>
+                            <button
+                                type="reset"
+                                className="flex w-full justify-center rounded-md bg-red-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-red-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
+                            >
+                                Reset
                             </button>
                         </div>
                     </form>
