@@ -1,6 +1,6 @@
 import axios from "axios"
 import { User } from "../models/User";
-const baseUrl = "http://localhost:8080/ecocheck/api/v1/users";
+const baseUrl = "http://localhost:8081/ecocheck/api/v1/users";
 
 const saveUser = async (user: any) => {
     try{
