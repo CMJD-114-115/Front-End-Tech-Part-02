@@ -38,8 +38,23 @@ const updateUser = async (user: any) => {
     } catch (err) {
         console.error(err)
     }
+}
+
+    const deleteUser = async (userId: string) => {
+        try {
+            const response = await axios.delete(
+                `${baseUrl}/${userId}`
+                
+            );
+            if (response.status !== 204) {
+                throw new Error("Failed to Update the User")
+            }
+            return response.status
+        } catch (err) {
+            console.error(err)
+        }
 
 
 }
 
-export default { saveUser, getUsers, updateUser}
+    export default { saveUser, getUsers, updateUser, deleteUser }

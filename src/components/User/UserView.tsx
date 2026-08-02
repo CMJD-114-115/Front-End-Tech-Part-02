@@ -29,6 +29,16 @@ export const UserView = () => {
         setSelectedUser(user)
         setOpen(true)
     }
+
+    const handleOnDelete = async (userId: string)=>{
+        const status = await UserService.deleteUser(userId)
+        if(status !== 204){
+            alert("User Delete Fail")
+        }else{
+            alert("User Deleted Successfully")
+            getAllUsers()
+        }
+    }
     return (<>
         <div className="max-w-7xl mx-auto mt-8 bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
             {/* Header */}
@@ -89,7 +99,7 @@ export const UserView = () => {
                                     <button onClick={() => handleOnEdit(user)} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
                                         Edit
                                     </button>
-                                    <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                                    <button onClick={()=> handleOnDelete(user.userId)} className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
                                         Delete
                                     </button>
                                 </td>
