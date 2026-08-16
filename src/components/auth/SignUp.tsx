@@ -1,6 +1,7 @@
 import { ChangeEvent, use, useState } from "react";
 import { User, UserRole } from "../../models/User";
 import UserService from "../../service/UserService";
+import AuthService from "../../service/AuthService";
 
 export const SignUp = () => {
     const [user, setUser] = useState<User>({
@@ -19,12 +20,9 @@ export const SignUp = () => {
 
     const handleOnSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault()
-        const status = await UserService.saveUser(user)
-        if (status !== 201) {
-            alert("User save failed")
-            return
-        }
-        alert("User save Successfully")
+        const token = await AuthService.signUp(user)
+        console.log(token)
+
 
     }
 

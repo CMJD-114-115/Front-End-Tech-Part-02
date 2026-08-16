@@ -2,19 +2,19 @@ import axios from "axios"
 import { User } from "../models/User";
 const baseUrl = "http://localhost:8081/ecocheck/api/v1/users";
 
-const saveUser = async (user: any) => {
-    try{
-        const response = await axios.post(
-            baseUrl,
-            user        
-        );
-        return response.status
-    }catch(err){
-       console.error(err)
-    }
+// const saveUser = async (user: any) => {
+//     try{
+//         const response = await axios.post(
+//             baseUrl,
+//             user        
+//         );
+//         return response.status
+//     }catch(err){
+//        console.error(err)
+//     }
 
     
-}
+// }
 
 const getUsers = async () =>{
     try {
@@ -57,4 +57,4 @@ const updateUser = async (user: any) => {
 
 }
 
-    export default { saveUser, getUsers, updateUser, deleteUser }
+    export default {getUsers, updateUser, deleteUser }

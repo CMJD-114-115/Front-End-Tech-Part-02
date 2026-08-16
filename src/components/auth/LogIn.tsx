@@ -16,13 +16,13 @@ export const LogIn = () => {
     }
 
     const handleOnSubmit = async (e: React.SyntheticEvent) => {
-        e.preventDefault()
-        const status = await UserService.saveUser(signIn)
-        if (status !== 201) {
-            alert("User save failed")
-            return
-        }
-        alert("User save Successfully")
+        // e.preventDefault()
+        // const status = await UserService.saveUser(signIn)
+        // if (status !== 201) {
+        //     alert("User save failed")
+        //     return
+        // }
+        // alert("User save Successfully")
 
     }
 
