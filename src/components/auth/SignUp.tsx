@@ -2,6 +2,8 @@ import { ChangeEvent, use, useState } from "react";
 import { User, UserRole } from "../../models/User";
 import UserService from "../../service/UserService";
 import AuthService from "../../service/AuthService";
+import { useAuth } from "./AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
     const [user, setUser] = useState<User>({
@@ -12,6 +14,21 @@ export const SignUp = () => {
         password: "",
         role: UserRole.ADMIN
     })
+
+   const handleReset = ()=>{
+       setUser({
+           userId: "",
+           firstName: "",
+           lastName: "",
+           email: "",
+           password: "",
+           role: UserRole.ADMIN
+       })
+   } 
+    //get context
+   const { login } = useAuth()
+   const navigate= useNavigate()
+
     // Catch Input values
     const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
@@ -21,7 +38,9 @@ export const SignUp = () => {
     const handleOnSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault()
         const token = await AuthService.signUp(user)
-        console.log(token)
+        login(token)
+        handleReset()
+        navigate("/users")
 
 
     }
