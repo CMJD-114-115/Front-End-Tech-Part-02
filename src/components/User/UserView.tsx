@@ -40,7 +40,7 @@ export const UserView = () => {
         }
     }
     return (<>
-        <div className="max-w-7xl mx-auto mt-8 bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+        <div className="max-w-8xl mx-auto mt-8 bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
             {/* Header */}
             <div className="px-6 py-5 border-b border-gray-200">
                 <h2 className="text-2xl font-bold text-gray-800">

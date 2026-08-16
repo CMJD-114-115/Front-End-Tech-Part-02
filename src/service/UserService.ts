@@ -2,6 +2,11 @@ import axios from "axios"
 import { User } from "../models/User";
 const baseUrl = "http://localhost:8081/ecocheck/api/v1/users";
 
+const handleToken = () =>{
+    const token = localStorage.getItem("ecoCheckCmjd-2026")
+    return "Bearer "+token
+}
+
 // const saveUser = async (user: any) => {
 //     try{
 //         const response = await axios.post(
@@ -18,7 +23,15 @@ const baseUrl = "http://localhost:8081/ecocheck/api/v1/users";
 
 const getUsers = async () =>{
     try {
-        const response = await axios.get(baseUrl);
+        const response = await axios.get<User[]>(
+            `${baseUrl}`,
+            {
+                headers:{
+                    Authorization: handleToken()
+                }
+            }
+        
+        );
         return response.data
     } catch (err) {
         console.error(err)
