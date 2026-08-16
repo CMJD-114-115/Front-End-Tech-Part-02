@@ -1,7 +1,8 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import path from 'path'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useAuth } from '../auth/AuthProvider'
 
 const navigation = [
     { name: 'SignIn', path:"/sign-in", current: true },
@@ -17,6 +18,12 @@ function classNames(...classes: string[]) {
 }
 
 export function NavBar() {
+    const { isAuthenticated, logout } = useAuth()
+    const navigate = useNavigate()
+    const handleOnLogOut = () =>{
+        logout()
+        navigate("/sign-in")
+    }
     return (
         <Disclosure
             as="nav"
@@ -62,11 +69,13 @@ export function NavBar() {
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <button
                             type="button"
-                            className="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
+                            className="relative rounded-full p-1 text-yellow-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
+                            onClick={handleOnLogOut}
                         >
-                            <span className="absolute -inset-1.5" />
+                            {/* <span className="absolute -inset-1.5" />
                             <span className="sr-only">View notifications</span>
-                            <BellIcon aria-hidden="true" className="size-6" />
+                            <BellIcon aria-hidden="true" className="size-6" /> */}
+                            Logout
                         </button>
                     </div>
                 </div>
