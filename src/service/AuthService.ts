@@ -16,5 +16,20 @@ const signUp = async (user: any) => {
 
 
 }
+const signIn = async (login: any) => {
+    try {
+        const response = await axios.post(
+            `${baseUrl}/signin`,
+            login
+        );
+        console.log("Token is: ", response.data.token)
+        return response.data.token
+    } catch (err) {
+        console.error(err)
+    }
 
-export default { signUp }
+
+}
+
+
+export default { signUp, signIn }

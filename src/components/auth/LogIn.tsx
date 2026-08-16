@@ -2,6 +2,9 @@ import { ChangeEvent, use, useState } from "react";
 import { User, UserRole } from "../../models/User";
 import UserService from "../../service/UserService";
 import { SignIn } from "../../models/SignIn";
+import { useAuth } from "./AuthProvider";
+import { useNavigate } from "react-router-dom";
+import AuthService from "../../service/AuthService";
 
 export const LogIn = () => {
     const [signIn, setSignIn] = useState<SignIn>({
@@ -9,20 +12,32 @@ export const LogIn = () => {
         password: "",
 
     })
+    
     // Catch Input values
     const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
         setSignIn((prev) => ({ ...prev, [name]: value }))
     }
+    const handleReset = () => {
+        setSignIn({
+            email: "",
+            password: "",
+
+        })
+    } 
+
+    //get context
+    const { login } = useAuth()
+    const navigate = useNavigate()
 
     const handleOnSubmit = async (e: React.SyntheticEvent) => {
-        // e.preventDefault()
-        // const status = await UserService.saveUser(signIn)
-        // if (status !== 201) {
-        //     alert("User save failed")
-        //     return
-        // }
-        // alert("User save Successfully")
+        e.preventDefault()
+        const token = await AuthService.signIn(signIn)
+        login(token)
+        handleReset()
+        navigate("/users")
+
+
 
     }
 
@@ -41,7 +56,7 @@ export const LogIn = () => {
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                     <form className="space-y-6" onSubmit={handleOnSubmit}>
-            
+
                         <div>
                             <label htmlFor="email" className="block text-sm/6 font-medium text-blue-400">
                                 Email
