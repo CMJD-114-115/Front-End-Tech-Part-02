@@ -11,7 +11,8 @@ function App() {
     <>
       <NavBar />
       <Routes>
-        <Route path='/signup' element={<SignUp />} />
+        <Route path='/sign-up' element={<SignUp />} />
+        <Route path='/users' element={<UserView />} />
       </Routes>
 
     </>
