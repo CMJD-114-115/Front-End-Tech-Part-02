@@ -5,6 +5,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider = ({children} : {children: ReactNode}) =>{
      const [isAuthenticated, setIsAuthenticated] = useState(false)
+    //  const [isAuthenticated, setIsAuthenticated] = useState(true)
 
     //  Get token from localstorage
 

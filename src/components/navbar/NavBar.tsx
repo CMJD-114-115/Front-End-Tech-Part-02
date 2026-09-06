@@ -4,6 +4,8 @@ import path from 'path'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../auth/AuthProvider'
 import { NavItem } from '../../models/NavItem'
+import { jwtDecode } from 'jwt-decode'
+
 
 
 const openRoutes: NavItem[] = [

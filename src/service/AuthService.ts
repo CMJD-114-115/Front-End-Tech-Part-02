@@ -1,6 +1,7 @@
 import axios from "axios"
 import { User } from "../models/User";
-const baseUrl = "http://localhost:8081/ecocheck/api/v1/auth";
+// const baseUrl = "http://localhost:8081/ecocheck/api/v1/auth";
+const baseUrl = "http://localhost:3500/ecocheck/api/v1/auth";
 
 const signUp = async (user: any) => {
     try {
@@ -19,7 +20,8 @@ const signUp = async (user: any) => {
 const signIn = async (login: any) => {
     try {
         const response = await axios.post(
-            `${baseUrl}/signin`,
+            // `${baseUrl}/signin`,
+            `${baseUrl}/login`,
             login
         );
         console.log("Token is: ", response.data.token)

@@ -1,6 +1,8 @@
 import axios from "axios"
 import { User } from "../models/User";
-const baseUrl = "http://localhost:8081/ecocheck/api/v1/users";
+// const baseUrl = "http://localhost:8081/ecocheck/api/v1/users";
+const baseUrl = "http://localhost:3500/ecocheck/api/v1/users";
+
 
 const handleToken = () =>{
     const token = localStorage.getItem("ecoCheckCmjd-2026")
